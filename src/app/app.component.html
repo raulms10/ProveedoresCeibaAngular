@@ -1,0 +1,14 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div style="float: right;">
+    <button matTooltip="Opciones de navegación" mat-icon-button [matMenuTriggerFor]="menu">
+        <span></span>
+        <mat-icon color="primary">more_vert</mat-icon>
+    </button>
+  <mat-menu #menu="matMenu">
+      <button mat-menu-item (click)="navegar('')">Página principal </button>
+      <button mat-menu-item (click)="navegar('/registro')">Registro Proveedores</button>
+      <button mat-menu-item (click)="navegar('/consulta')">Consulta Proveedores</button>
+  </mat-menu>
+</div>
+
+<router-outlet></router-outlet>
