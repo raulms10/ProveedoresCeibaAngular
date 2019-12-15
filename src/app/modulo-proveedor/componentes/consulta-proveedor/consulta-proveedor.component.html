@@ -1,3 +1,31 @@
-<p>
-  consulta-proveedor works!
-</p>
+<div class="container">
+    <mat-card class="card-principal">
+      <mat-card-header>
+        <div class="header-tittle">
+          <h2 class="margin-bottom-0">PROVEEDORES</h2>
+        </div>
+      </mat-card-header>
+      <mat-card-content class="margin-top-15">
+        <mat-card>
+          <mat-card-header>
+            <div class="header-subtittle">
+              <div class="left">
+                <h2>Lista de proveedores</h2>
+              </div>
+              <div class="right">
+                <button *ngIf="!cargando" matTooltip="Ingresar proveedor" mat-raised-button color="accent" (click)="nuevoProveeder()"> NUEVO </button>
+              </div>
+            </div>
+          </mat-card-header>
+          <mat-card-content>
+            <app-spinner [mostrar]="cargando"></app-spinner>
+            <div *ngIf="!cargando">
+              <app-tabla-proveedores [proveedores]="proveedores"></app-tabla-proveedores>
+            </div>
+          </mat-card-content>
+          <mat-card-footer></mat-card-footer>
+        </mat-card>
+      </mat-card-content>
+      <mat-card-footer></mat-card-footer>
+    </mat-card>
+  </div>

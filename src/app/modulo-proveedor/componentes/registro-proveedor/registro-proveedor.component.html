@@ -1,3 +1,35 @@
-<p>
-  registro-proveedor works!
-</p>
+<form [formGroup]="form" (ngSubmit)="enviar()">
+  <div class="container">
+    <mat-card class="card-principal">
+      <mat-card-header>
+        <div class="header-tittle">
+          <h2 class="margin-bottom-0">REGISTRAR Ó ACTUALIZAR PROVEEDOR</h2>
+        </div>
+      </mat-card-header>
+      <mat-card-content class="margin-top-15">
+        <mat-card>
+          <mat-card-header>
+            <div class="header-subtittle">
+              <div class="left">
+                <h2> Proveedor </h2>
+              </div>
+            </div>
+          </mat-card-header>
+          <mat-card-content></mat-card-content>
+          <mat-card-footer> </mat-card-footer>
+        </mat-card>
+        <div *ngIf="!cargando" class="margin-top-15 text-left">
+          Los campos marcados con asterisco (<label class="label-required">*</label>) son obligatorios.
+        </div>
+      </mat-card-content>
+      <mat-card-footer>
+        <div class="container-button-center">
+          <button matTooltip="Registrar proveedor" mat-raised-button color="primary" type="submit"
+            *ngIf="!cargando">GUARDAR</button>
+          <button matTooltip="Cancelar" mat-raised-button color="accent" type="button"
+            (click)="atras()">CANCELAR</button>
+        </div>
+      </mat-card-footer>
+    </mat-card>
+  </div>
+</form>

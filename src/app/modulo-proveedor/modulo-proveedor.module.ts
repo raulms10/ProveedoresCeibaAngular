@@ -1,38 +1,21 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatIconModule, MatInputModule, MatButtonModule, MatTooltipModule, MatMenuModule,
-         MatFormFieldModule } from '@angular/material';
-import { FormsModule } from '@angular/forms';
 
 import { ModuloProveedorRoutingModule } from './modulo-proveedor-routing.module';
 import { RegistroProveedorComponent } from './componentes/registro-proveedor/registro-proveedor.component';
 import { ConsultaProveedorComponent } from './componentes/consulta-proveedor/consulta-proveedor.component';
+import { TablaProveedoresComponent } from './componentes/tabla-proveedores/tabla-proveedores.component';
+import { ModuloCoreModule } from '../modulo-core/modulo-core.module';
+import { ProveedorService } from './servicios/proveedor.service';
 
 @NgModule({
-  declarations: [RegistroProveedorComponent, ConsultaProveedorComponent],
+  declarations: [RegistroProveedorComponent, ConsultaProveedorComponent, TablaProveedoresComponent],
   imports: [
     CommonModule,
     ModuloProveedorRoutingModule,
-    MatIconModule,
-    MatButtonModule,
-    MatInputModule,
-    MatFormFieldModule,
-    MatTooltipModule,
-    MatMenuModule,
-    BrowserModule,
-    FormsModule,
-    BrowserAnimationsModule
+    ModuloCoreModule
   ],
-  exports: [RegistroProveedorComponent, ConsultaProveedorComponent, 
-    MatIconModule,
-    MatButtonModule,
-    MatInputModule,
-    MatFormFieldModule,
-    MatTooltipModule,
-    MatMenuModule,
-    BrowserModule,
-    FormsModule, BrowserAnimationsModule]
+  providers: [ProveedorService],
+  exports: [RegistroProveedorComponent, ConsultaProveedorComponent, TablaProveedoresComponent]
 })
 export class ModuloProveedorModule { }
