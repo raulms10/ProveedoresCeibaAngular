@@ -1,0 +1,158 @@
+/* You can add global styles to this file, and also import other style files */
+@import '~@angular/material/theming';
+@import '~material-design-icons/iconfont/material-icons.css';
+
+@include mat-core();
+
+$primary: mat-palette($mat-green, 900);
+$accent:  mat-palette($mat-light-green, 700, A200, A400);
+$warn:    mat-palette($mat-red, 500);
+$color-accent: #689f38;
+$color-primary: #1b5e20;
+$color-background:#f0f0f0;//FAFAFA;
+
+$config: mat-typography-config();
+
+$theme: mat-light-theme($primary, $accent, $warn);
+
+$padding-value: 1.5vw;
+$margin-value: 1.5vw;
+
+$font_size_16 : 16px;
+$font_size_14 : 14px;
+$font_size_12 : 12px;
+$font_size_10 : 10px;
+
+@include angular-material-theme($theme);
+
+body {
+    font-family: mat-font-family($config);
+    font-weight: normal;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+td, th {
+    text-align: left;
+    border: 0.1px solid #ddd;
+}
+
+h1 {
+    font-weight: normal;
+    font-size: $font_size_16;
+  }
+  
+h2 {
+    font-weight: bold;
+    font-size: $font_size_16;
+}
+
+h3 {
+    font-weight: bold;
+    font-size: $font_size_14;
+}
+
+h4 {
+    font-weight: normal;
+    font-size: $font_size_14;
+}
+
+.center, .not-records {
+    text-align: center !important;
+}
+
+.text-left {
+    text-align: left !important;
+  }
+  
+.text-justify {
+    text-align: justify !important;
+}
+
+.left {
+    float:left;
+    width: 60%;
+    text-align: left;
+}
+  
+.right {
+    float:right;
+    width: 40%;
+    text-align: right;
+}
+
+.mat-header-cell {
+    text-align: center;
+    background-color: $color-background
+}
+
+.label-header-table {
+    color: $color-accent;
+    font-weight: bold;
+    text-align: center;
+}
+
+td.mat-cell, td.mat-footer-cell, th.mat-header-cell {
+    padding-right: 5px !important;
+    padding-left: 5px !important;
+}
+
+.container {
+    margin: $margin-value;
+    padding: $padding-value;
+    text-align: center;
+}
+
+.container-button-center {
+    width: 100%;
+    padding-bottom: 20px;
+    text-align: center;
+}
+
+.card-principal {
+    box-shadow: none !important;
+}
+
+.header-tittle {
+    width: 95%;
+    background: $color-primary;
+    color: white;
+    padding: 10px;
+    margin: -40px 20px 15px;
+    box-shadow: 0 5px 20px 0 rgba(0,0,0,.2), 0 13px 24px -11px rgba(108,154,6,.6);
+}
+  
+.header-subtittle {
+    width: 100%;
+    color: $color-primary;
+    margin: 0px 20px 0px;
+    text-align: left;
+}
+
+.label-required {
+    color: #f44336;
+    padding-left: 1px;
+}
+
+.margin-0 {
+    margin: 0px;
+}
+  
+.margin-bottom-0 {
+    margin-bottom: 0px;
+}
+
+.margin-top-15 {
+    margin-top: 15px;
+}
+
+.margin-left-15 {
+    margin-left: 15px
+}
+
+button {
+    margin: 4px;
+}

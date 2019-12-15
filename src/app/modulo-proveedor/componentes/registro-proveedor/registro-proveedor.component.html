@@ -1,3 +1,92 @@
-<p>
-  registro-proveedor works!
-</p>
+<form [formGroup]="form" (ngSubmit)="enviar()">
+  <div class="container">
+    <mat-card class="card-principal">
+      <mat-card-header>
+        <div class="header-tittle">
+          <h2 class="margin-bottom-0">REGISTRAR Ó ACTUALIZAR PROVEEDOR</h2>
+        </div>
+      </mat-card-header>
+      <mat-card-content class="margin-top-15">
+        <mat-card>
+          <mat-card-header>
+            <div class="header-subtittle">
+              <div class="left">
+                <h2> Proveedor </h2>
+              </div>
+            </div>
+          </mat-card-header>
+          <mat-card-content>
+            <app-spinner [mostrar]="cargando"></app-spinner>
+            <div *ngIf="!cargando" class="header-subtittle" style="display: inline-block;">
+              <div class="container-center">
+                <mat-form-field class="full-screen">
+                  <mat-label>Nombre proveedor <label class="label-required">*</label></mat-label>
+                  <input matInput placeholder="Ingrese el nombre del proveedor" formControlName="formNombre" />
+                  <mat-error *ngIf="form.get('formNombre').hasError('required')">
+                    Debe ingresar el nombre del proveedor
+                  </mat-error>
+                  <mat-error *ngIf="form.get('formNombre').hasError('espacios')">
+                    El nombre no puede ser solo espacios
+                  </mat-error>
+                  <mat-error *ngIf="form.get('formNombre').hasError('minlength') && !form.get('formNombre').hasError('espacios')">
+                    Debe ingresar mínimo 5 caracteres
+                  </mat-error>
+                  <mat-error *ngIf="form.get('formNombre').hasError('palindromo') && !form.get('formNombre').hasError('minlength') && !form.get('formNombre').hasError('espacios')">
+                    El nombre no puede ser palíndromo
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              <div class="full-screen">
+                <div class="left">
+                  <mat-form-field class="full-screen">
+                    <mat-label>Teléfono <label class="label-required">*</label></mat-label>
+                    <input matInput placeholder="Ingrese el número de teléfono" formControlName="formTelefono" />
+                    <mat-error *ngIf="form.get('formTelefono').hasError('required')">
+                      Debe ingresar el número de teléfono 
+                    </mat-error>
+                    <mat-error *ngIf="form.get('formTelefono').hasError('integer')">
+                      Debe ingresar solo valores numéricos
+                    </mat-error>
+                    <mat-error *ngIf="(form.get('formTelefono').hasError('max') || form.get('formTelefono').hasError('maxlength') || form.get('formTelefono').hasError('minlength')) && !form.get('formTelefono').hasError('integer')">
+                      Debe ingresar exactamente 7 números
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="right">
+                  <mat-form-field class="full-screen">
+                    <mat-label>Dirección <label class="label-required">*</label></mat-label>
+                    <input matInput placeholder="Ingrese la dirección " formControlName="formDireccion" />
+                    <mat-error *ngIf="form.get('formDireccion').hasError('required')">
+                      Debe ingresar la dirección
+                    </mat-error>
+                    <mat-error *ngIf="form.get('formDireccion').hasError('espacios')">
+                      La dirección no puede ser solo espacios
+                    </mat-error>
+                    <mat-error *ngIf="form.get('formDireccion').hasError('empieza') && !form.get('formDireccion').hasError('espacios')">
+                      La dirección debe empezar con el prefijo 'CL'
+                    </mat-error>
+                    <mat-error *ngIf="form.get('formDireccion').hasError('vocal') && !form.get('formDireccion').hasError('empieza') && !form.get('formDireccion').hasError('espacios')">
+                      La dirección debe tener exactamente 3 vocales
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+          </mat-card-content>
+          <mat-card-footer> </mat-card-footer>
+        </mat-card>
+        <div *ngIf="!cargando" class="margin-top-15 text-left">
+          Los campos marcados con asterisco (<label class="label-required">*</label>) son obligatorios.
+        </div>
+      </mat-card-content>
+      <mat-card-footer>
+        <div class="container-button-center">
+          <button matTooltip="Registrar proveedor" mat-raised-button color="primary" type="submit"
+            *ngIf="!cargando">GUARDAR</button>
+          <button matTooltip="Cancelar" mat-raised-button color="accent" type="button"
+            (click)="atras()">CANCELAR</button>
+        </div>
+      </mat-card-footer>
+    </mat-card>
+  </div>
+</form>
