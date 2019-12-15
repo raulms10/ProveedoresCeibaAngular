@@ -42,12 +42,14 @@ export class ConsultaProveedorComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.subscriptionServices.push(this.proveedorService.obtenerProveedores().subscribe(
       (result) => {
-        if (result.codigo === Constantes.CODIGO_200) {
-          if (result.dato && result.dato.length > 0) {
-            this.proveedores = result.dato;
-          } else {
-            this.abrirSnackBar(Constantes.SIN_INFO);
-          }
+        // if (result.ok) {
+        //   if (result.dato && result.dato.length > 0) {
+        //     this.proveedores = result.dato;
+        //   } else {
+        //     this.abrirSnackBar(Constantes.SIN_INFO);
+        //   }
+        if (result) {
+          this.proveedores = result;
         } else {
           this.abrirSnackBar(Constantes.SIN_INFO);
         }
@@ -55,7 +57,7 @@ export class ConsultaProveedorComponent implements OnInit, OnDestroy {
       },
       (error) => {
         console.log(error);
-        this.quemarDatoDePrueba();  // Esta línea se debe comentar
+        // this.quemarDatoDePrueba();  // Esta línea se debe comentar
         this.abrirSnackBar(Constantes.HA_OCURRIDO_UN_ERROR);
         this.cargando = false;
       }

@@ -1,6 +1,8 @@
 import { ValidatorFn, AbstractControl } from '@angular/forms';
 import { isNumeric } from 'rxjs/util/isNumeric';
 export class ValidadorUtil {
+  static diasPermitidos = '0'; // El cero representa el domingo
+
   /* Se envia true si es requerido que ingrese información, y se mostrará el respectivo error
      al dejr el campo en blaco, si se envia false es porque el campo es opcional y si no ingresa nada
      cuenta como número, pero si ingresa algo, ese algo debe ser un valor numérico*/
@@ -65,5 +67,21 @@ export class ValidadorUtil {
       }
       return null;
     };
+  }
+
+  static esDiaSemanaPermitido(): boolean {
+    const fecha = new Date().getDay();
+    return !ValidadorUtil.diasPermitidos.includes(fecha+'');
+  }
+
+  static getFormatoFecha (fecha: Date) {
+    if (fecha === undefined || fecha === null) {
+      return '';
+    }
+    const locaDate = fecha.toLocaleString().split('-');
+    const dia = Number(locaDate[0]) <= 9 ? '0' + locaDate[0] : locaDate[0];
+    const mes = Number(locaDate[1]) <= 9 ? '0' + locaDate[1] : locaDate[1];
+    const anno = fecha.getFullYear();
+    return  anno + '-' + mes + '-' + dia
   }
 }

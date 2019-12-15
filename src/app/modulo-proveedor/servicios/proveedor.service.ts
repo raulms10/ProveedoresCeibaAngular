@@ -13,12 +13,12 @@ export class ProveedorService {
 
   urlConsultarProveedores = environment.urlServicios + Constantes.URL_CONSULTAR_PROVEEDORES;
   urlRegistrarProveedor = environment.urlServicios + Constantes.URL_REGISTRO_PROVEEDOR;
-  urlActualizarProveedor = environment.urlServicios + Constantes.URL_REGISTRO_PROVEEDOR;
+  urlActualizarProveedor = environment.urlServicios + Constantes.URL_ACTUALIZAR_PROVEEDOR;
 
   constructor(private httpClient: HttpClient) { }
 
-  obtenerProveedores(): Observable<Respuesta> {
-    return this.httpClient.get<Respuesta>(this.urlConsultarProveedores);
+  obtenerProveedores(): Observable<Proveedor[]> {
+    return this.httpClient.get<Proveedor[]>(this.urlConsultarProveedores);
   }
 
   actualizarProveedor(proveedor: Proveedor): Observable<Respuesta> {

@@ -1,5 +1,5 @@
 export class Respuesta {
-    codigo: number;
+    ok: boolean;
     mensaje: string;
-    dato: any;
+    resultado: any;
 }

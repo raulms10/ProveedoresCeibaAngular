@@ -63,10 +63,17 @@ export class RegistroProveedorComponent implements OnInit, OnDestroy {
     this.proveedor.nombre = this.form.get('formNombre').value;
     this.proveedor.telefono = this.form.get('formTelefono').value;
     this.proveedor.direccion = this.form.get('formDireccion').value;
+    this.proveedor.fechaRegistro = this.proveedor.fechaRegistro ? this.proveedor.fechaRegistro : new Date();// ValidadorUtil.getFormatoFecha(this.proveedor.fechaRegistro ? this.proveedor.fechaRegistro : new Date())
   }
+
+  esValido
   
   enviar() {
     if (this.form.valid) {
+      if (!ValidadorUtil.esDiaSemanaPermitido()) {
+        this.abrirSnackBar(Constantes.NO_DIAS_PERMITIDO);
+        return;
+      }
       this.cargando = true;
       this.modificarDatosProveedor();
       if (this.esActualizarProveedor) {
@@ -82,13 +89,7 @@ export class RegistroProveedorComponent implements OnInit, OnDestroy {
   private actualizarProveedor() {
     this.subscriptionServices.push(this.proveedorService.actualizarProveedor(this.proveedor).subscribe(
       (result) => {
-        this.snackBarRef = this.abrirSnackBar(result.mensaje);
-        if (result.codigo === Constantes.CODIGO_200) {
-          this.snackBarRef.afterDismissed().subscribe(() => {
-            this.router.navigate([Constantes.RUTA_CONSULTAR_PROVEEDOR]);
-          });
-        } 
-        this.cargando = false;
+        this.procesarResultado(result);
       },
       (error) => {
         console.log(error);
@@ -101,13 +102,7 @@ export class RegistroProveedorComponent implements OnInit, OnDestroy {
   private registrarProveedor() {
     this.subscriptionServices.push(this.proveedorService.registrarProveedor(this.proveedor).subscribe(
       (result) => {
-        this.snackBarRef = this.abrirSnackBar(result.mensaje);
-        if (result.codigo === Constantes.CODIGO_200) {
-          this.snackBarRef.afterDismissed().subscribe(() => {
-            this.router.navigate([Constantes.RUTA_CONSULTAR_PROVEEDOR]);
-          });
-        } 
-        this.cargando = false;
+        this.procesarResultado(result);
       },
       (error) => {
         console.log(error);
@@ -115,6 +110,16 @@ export class RegistroProveedorComponent implements OnInit, OnDestroy {
         this.cargando = false;
       }
     ));
+  }
+
+  procesarResultado(result) {
+    this.snackBarRef = this.abrirSnackBar(result.mensaje);
+    if (result.ok) {
+      this.snackBarRef.afterDismissed().subscribe(() => {
+        this.router.navigate([Constantes.RUTA_CONSULTAR_PROVEEDOR]);
+      });
+    } 
+    this.cargando = false;
   }
 
   atras() {

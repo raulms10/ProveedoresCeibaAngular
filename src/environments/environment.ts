@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  urlServicios: 'http://localhost:8080/proveedores'
+  urlServicios: 'http://localhost:8080/proveedores/'
   // urlServicios: 'http://192.168.16.125:8080/'
 };
 
