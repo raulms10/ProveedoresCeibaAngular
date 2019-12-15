@@ -26,4 +26,44 @@ export class ValidadorUtil {
       return null;
     };
   }
+
+  static validadorPalindromo(tieneRequerido: boolean): ValidatorFn {
+    return (control: AbstractControl): { [key: string]: boolean } | null => {
+      const valor: string = String(control.value);
+      const hayValor = valor !== undefined && valor !== null && valor !== '';
+      if ((!hayValor && !tieneRequerido) || (hayValor && valor === valor.split('').reverse().join(''))) {
+        return {palindromo: true};
+      }
+      return null;
+    };
+  }
+
+  // Valida que la palabra inicie con el parámetro enviado
+  static validadorIniciaCon(tieneRequerido: boolean, iniciaCon: string): ValidatorFn {
+    return (control: AbstractControl): { [key: string]: boolean } | null => {
+      const valor: string = String(control.value);
+      const hayValor = valor !== undefined && valor !== null && valor !== '';
+      if ((!hayValor && !tieneRequerido) || (hayValor && !valor.startsWith(iniciaCon))) {
+        return {empieza: true};
+      }
+      return null;
+    };
+  }
+
+  // Valida que la palabra tenga la cantidad de vocales que indique parámetro enviado
+  static validadorCantVocales(tieneRequerido: boolean, cantidad: number): ValidatorFn {
+    return (control: AbstractControl): { [key: string]: boolean } | null => {
+      const valor: string = String(control.value);
+      const hayValor = valor !== undefined && valor !== null && valor !== '';
+      if (!hayValor && !tieneRequerido) {
+        return {vocal: true};
+      } else {
+        const reg = valor.match(/[AEIOUaeiou]/g);
+        if ((hayValor && !reg) || (hayValor && reg.length != cantidad)) {
+          return {vocal: true};
+        }
+      }
+      return null;
+    };
+  }
 }

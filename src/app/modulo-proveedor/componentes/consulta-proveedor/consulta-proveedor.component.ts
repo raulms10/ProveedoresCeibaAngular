@@ -66,7 +66,7 @@ export class ConsultaProveedorComponent implements OnInit, OnDestroy {
     this.subscriptionServices.forEach(subscription => subscription.unsubscribe());
   }
 
-  abrirSnackBar(message: string) {
+  private abrirSnackBar(message: string) {
     this.snackBar.open(message, 'OK', {
       duration: 5000,
     });

@@ -9,4 +9,5 @@ export class Constantes {
 
     static SIN_INFO = 'Sin información';
     static HA_OCURRIDO_UN_ERROR = 'Ha ocurrido un error';
+    static CAMPOS_INVALIDOS = 'Campos inválidos, por favor verifique';
 }
