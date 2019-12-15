@@ -27,16 +27,16 @@ export class RegistroProveedorComponent implements OnInit, OnDestroy {
   form = new FormGroup({
     formNombre: new FormControl('', [Validators.required, ValidadorUtil.validadorEspacios(true), Validators.minLength(5), ValidadorUtil.validadorPalindromo(true)]),
     formTelefono: new FormControl('', [Validators.required, ValidadorUtil.validadorNumerosEnteros(true),
-                                                  Validators.minLength(7),Validators.maxLength(7), Validators.max(9999999)]),
-    formDireccion: new FormControl('', [Validators.required, ValidadorUtil.validadorEspacios(true), 
-                                        ValidadorUtil.validadorIniciaCon(true, 'CL'), ValidadorUtil.validadorCantVocales(true, 3)]),
+    Validators.minLength(7), Validators.maxLength(7), Validators.max(9999999)]),
+    formDireccion: new FormControl('', [Validators.required, ValidadorUtil.validadorEspacios(true),
+    ValidadorUtil.validadorIniciaCon(true, 'CL'), ValidadorUtil.validadorCantVocales(true, 3)]),
   });
 
-  constructor(private providerService: ProviderService, 
-              private proveedorService: ProveedorService, 
-              private location: Location,
-              private snackBar: MatSnackBar,
-              private router: Router) { }
+  constructor(private providerService: ProviderService,
+    private proveedorService: ProveedorService,
+    private location: Location,
+    private snackBar: MatSnackBar,
+    private router: Router) { }
 
   ngOnInit() {
     this.proveedor = this.providerService.dataProveedor;
@@ -67,18 +67,19 @@ export class RegistroProveedorComponent implements OnInit, OnDestroy {
   }
 
   esValido
-  
+
   enviar() {
     if (this.form.valid) {
-      if (!ValidadorUtil.esDiaSemanaPermitido()) {
-        this.abrirSnackBar(Constantes.NO_DIAS_PERMITIDO);
-        return;
-      }
       this.cargando = true;
       this.modificarDatosProveedor();
       if (this.esActualizarProveedor) {
         this.actualizarProveedor();
       } else {
+        if (!ValidadorUtil.esDiaSemanaPermitido()) {
+          this.abrirSnackBar(Constantes.NO_DIAS_PERMITIDO);
+          this.cargando = false;
+          return;
+        }
         this.registrarProveedor();
       }
     } else {
@@ -118,7 +119,7 @@ export class RegistroProveedorComponent implements OnInit, OnDestroy {
       this.snackBarRef.afterDismissed().subscribe(() => {
         this.router.navigate([Constantes.RUTA_CONSULTAR_PROVEEDOR]);
       });
-    } 
+    }
     this.cargando = false;
   }
 
